@@ -2,6 +2,7 @@
 #define CONFIGURATION_H
 
 #include "boards.h"
+#include "MyConfiguration.h"
 
 // This configuration file contains the basic settings.
 // Advanced settings can be found in Configuration_adv.h
@@ -33,7 +34,9 @@
 #define SERIAL_PORT 0
 
 // This determines the communication speed of the printer
+#ifndef BAUDRATE
 #define BAUDRATE 250000
+#endif
 
 // This enables the serial port associated to the Bluetooth interface
 //#define BTENABLED              // Enable BT interface on AT90USB devices
@@ -75,22 +78,32 @@
 #define DELTA_SEGMENTS_PER_SECOND 160
 
 // Center-to-center distance of the holes in the diagonal push rods.
+#ifndef DELTA_DIAGONAL_ROD
 #define DELTA_DIAGONAL_ROD 213.5 // mm
+#endif
 
 // Horizontal offset from middle of printer to smooth rod center.
+#ifndef DELTA_SMOOTH_ROD_OFFSET
 #define DELTA_SMOOTH_ROD_OFFSET 143.275 // mm
+#endif
 
 // Horizontal offset of the universal joints on the end effector.
+#ifndef DELTA_EFFECTOR_OFFSET
 #define DELTA_EFFECTOR_OFFSET 30.0 // mm
+#endif
 
 // Horizontal offset of the universal joints on the carriages.
+#ifndef DELTA_CARRIAGE_OFFSET
 #define DELTA_CARRIAGE_OFFSET 30.0 // mm
+#endif
 
 // Horizontal distance bridged by diagonal push rods when effector is centered.
 #define DELTA_RADIUS (DELTA_SMOOTH_ROD_OFFSET-DELTA_EFFECTOR_OFFSET-DELTA_CARRIAGE_OFFSET)
 
 // Print surface diameter/2 minus unreachable space (avoid collisions with vertical towers).
+#ifndef DELTA_PRINTABLE_RADIUS
 #define DELTA_PRINTABLE_RADIUS 80.0
+#endif
 
 // Effective X/Y positions of the three vertical towers.
 #define SIN_60 0.8660254037844386
@@ -328,12 +341,30 @@ your extruder heater takes 2 minutes to hit the target on heating.
 #endif
 
 // The pullups are needed if you directly connect a mechanical endswitch between the signal and ground pins.
-const bool X_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-const bool Y_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-const bool Z_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-const bool X_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-const bool Y_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
+#ifndef X_MIN_ENDSTOP_INVERTING
+const bool X_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
+#endif
+
+#ifndef Y_MIN_ENDSTOP_INVERTING
+const bool Y_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
+#endif
+
+#ifndef Z_MIN_ENDSTOP_INVERTING
+const bool Z_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
+#endif
+
+#ifndef X_MAX_ENDSTOP_INVERTING
+const bool X_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
+#endif
+
+#ifndef Y_MAX_ENDSTOP_INVERTING
+const bool Y_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
+#endif
+
+#ifndef Z_MAX_ENDSTOP_INVERTING
+const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
+#endif
+
 //#define DISABLE_MAX_ENDSTOPS
 //#define DISABLE_MIN_ENDSTOPS
 
@@ -355,9 +386,18 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 #define DISABLE_E false // For all extruders
 #define DISABLE_INACTIVE_EXTRUDER true //disable only inactive extruders and keep active extruder enabled
 
+#ifndef INVERT_X_DIR
 #define INVERT_X_DIR true    // for Mendel set to false, for Orca set to true
+#endif
+
+#ifndef INVERT_Y_DIR
 #define INVERT_Y_DIR true    // for Mendel set to true, for Orca set to false
+#endif
+
+#ifndef INVERT_Z_DIR
 #define INVERT_Z_DIR true    // for Mendel set to false, for Orca set to true
+#endif
+
 #define INVERT_E0_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E1_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E2_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
@@ -443,7 +483,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
   // these are the offsets to the probe relative to the extruder tip (Hotend - Probe)
   #define X_PROBE_OFFSET_FROM_EXTRUDER -22.919
   #define Y_PROBE_OFFSET_FROM_EXTRUDER -6.304
+  #ifndef Z_PROBE_OFFSET_FROM_EXTRUDER
   #define Z_PROBE_OFFSET_FROM_EXTRUDER -17.25  // Increase this if the first layer is too thin.
+  #endif
 
   #define Z_RAISE_BEFORE_HOMING 4       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
@@ -490,21 +532,35 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 // For deltabots this means top and center of the Cartesian print volume.
 #define MANUAL_X_HOME_POS 0
 #define MANUAL_Y_HOME_POS 0
+#ifndef MANUAL_Z_HOME_POS
 #define MANUAL_Z_HOME_POS 205  // For delta: Distance between nozzle and print surface after homing.
+#endif
 
 //// MOVEMENT SETTINGS
 #define NUM_AXIS 4 // The axis order in all axis related arrays is X, Y, Z, E
+#ifndef HOMING_FEEDRATE
 #define HOMING_FEEDRATE {200*60, 200*60, 200*60, 0}  // set the homing speeds (mm/min)
+#endif
 
 // default settings
 
 #define XYZ_FULL_STEPS_PER_ROTATION 200
+
+#ifndef XYZ_MICROSTEPS
 #define XYZ_MICROSTEPS 32
+#endif
+
+#ifndef XYZ_BELT_PITCH
 #define XYZ_BELT_PITCH 2
+#endif
+
+#ifndef XYZ_PULLEY_TEETH
 #define XYZ_PULLEY_TEETH 20
+#endif
+
 #define XYZ_STEPS (XYZ_FULL_STEPS_PER_ROTATION * XYZ_MICROSTEPS / double(XYZ_BELT_PITCH) / double(XYZ_PULLEY_TEETH))
 
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {XYZ_STEPS, XYZ_STEPS, XYZ_STEPS, 170}
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {XYZ_STEPS, XYZ_STEPS, XYZ_STEPS, E_STEPS}
 #define DEFAULT_MAX_FEEDRATE          {200, 200, 200, 200}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {9000,9000,9000,9000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for skeinforge 40+, for older versions raise them a lot.
 
@@ -670,7 +726,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 #endif
 
 // Panucatt VIKI LCD with status LEDs, integrated click & L/R/U/P buttons, separate encoder inputs
-#define LCD_I2C_VIKI
+//#define LCD_I2C_VIKI
 #ifdef LCD_I2C_VIKI
   // This uses the LiquidTWI2 library v1.2.3 or later ( https://github.com/lincomatic/LiquidTWI2 )
   // Make sure the LiquidTWI2 directory is placed in the Arduino or Sketchbook libraries subdirectory.
