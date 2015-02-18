@@ -51,4 +51,9 @@
 #define INVERT_Y_DIR false
 #define INVERT_Z_DIR false
 
+// AUto tune values: m303 E0 S200 C8
+#define DEFAULT_Kp 18.94
+#define DEFAULT_Ki 1.28
+#define DEFAULT_Kd 69.81
+
 #endif
